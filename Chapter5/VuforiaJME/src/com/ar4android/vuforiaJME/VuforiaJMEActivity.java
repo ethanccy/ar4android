@@ -60,6 +60,7 @@ import android.view.ViewGroup.LayoutParams;
 import com.jme3.system.android.AndroidConfigChooser.ConfigType;
 import com.jme3.texture.Image;
 import com.qualcomm.QCAR.QCAR;
+import com.qualcomm.vuforia.Vuforia;
 
 
 public class VuforiaJMEActivity extends AndroidHarness {
@@ -83,7 +84,7 @@ public class VuforiaJMEActivity extends AndroidHarness {
 
     // Name of the native dynamic libraries to load:
     private static final String NATIVE_LIB_SAMPLE = "VuforiaNative";
-    private static final String NATIVE_LIB_QCAR = "QCAR";
+    private static final String NATIVE_LIB_QCAR = "Vuforia";
     
     // Display size of the device:
     private int mScreenWidth = 0;
@@ -127,6 +128,7 @@ public class VuforiaJMEActivity extends AndroidHarness {
     {
         try
         {
+        	Log.d(TAG, "Native library lib" + nLibName + ".so loading");
             System.loadLibrary(nLibName);
             Log.d(TAG, "Native library lib" + nLibName + ".so loaded");
             return true;
@@ -164,7 +166,7 @@ public class VuforiaJMEActivity extends AndroidHarness {
             // Prevent the onDestroy() method to overlap with initialization:
             synchronized (mShutdownLock)
             {
-                QCAR.setInitParameters(VuforiaJMEActivity.this, mQCARFlags);
+            	Vuforia.setInitParameters(VuforiaJMEActivity.this, mQCARFlags, "AR5ao3//////AAAAAcfzQuWUHEzTq3tYljjkzWFaBsVJt5mVrmtyoDm3Y1OiSMhNKLZVx7LqWI0JFweR8zV5MWhlouK/9h1kBtLRTRccjzh9eZ60Fkk0Pad48R5wk2iOzKln9oG6S03E6+Fha3QbmQ49p7zEFpKWtLfju9iTMUOTwMLSHz7pzHVSbfAdXqhPN2By1jDA7MxMYxWFjO3byruksnFXjbFDhs7r+dIIOhxU6LSees5gmoseTRkDP5vt8tiL0KYFYD/4cWU6lqAB8V50d9VvLRqAQI9h16/5x46yv/vo0I+1+v1d6GkxwXsha2Gnmu1oJ14whJB9ZKG/dIwB9sfr8m5FKF/nzxjm+ySKw3Xfx4N355BJCKJr");
 
                 do
                 {
